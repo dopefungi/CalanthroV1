@@ -1,0 +1,1340 @@
+{
+  "file_id": "calanthor_unified_rules_and_packs.v1",
+  "generated_utc": "2025-12-26T01:05:37.966310Z",
+  "kernel": {
+    "id": "calanthor.rules_kernel.v1",
+    "combat_system": "DND_5E_style_dominant",
+    "adventure_system": {
+      "name": "Avatar-style Moves on d20",
+      "resolution": {
+        "dice": "d20",
+        "tiers": {
+          "strong_hit": {
+            "min_total": 15
+          },
+          "weak_hit": {
+            "min_total": 10,
+            "max_total": 14
+          },
+          "miss": {
+            "max_total": 9
+          }
+        },
+        "note": "Roll d20 + relevant ability mod + proficiency if a fitting skill/tool applies."
+      }
+    },
+    "conditions_framework": {
+      "minor_strain": {
+        "definition": "A short-lived stress condition representing fatigue, dread, numbness, exposure, or emotional overload.",
+        "default_mechanics": [
+          "While you have Minor Strain, you take -1 on your next d20 roll that meaningfully relates to the cause (GM decides).",
+          "Minor Strain clears on a short rest, or earlier if fictionally addressed (warmth, witness, ritual, remedy)."
+        ],
+        "stacking": "If gained again while you already have it, upgrade to 'Major Strain' at GM option (or apply one additional -1 on a second relevant roll)."
+      }
+    },
+    "tagging": {
+      "elements": [
+        "fire",
+        "air",
+        "water",
+        "verdant",
+        "earth",
+        "ice"
+      ],
+      "domain_pressures": [
+        "nyvakira_heat",
+        "keairvari_gale",
+        "shakora_tide",
+        "gaianok_bloom",
+        "khalsarra_weight",
+        "kaldraun_stasis",
+        "varook_silence",
+        "charnelix_blight"
+      ],
+      "suggested_spell_feature_tagging": [
+        "Prefer explicit tags on spells/features in your toolchain; use damage types as fallback.",
+        "Fallback mapping examples: fire->fire; cold->ice/water; thunder->air; lightning->air(storm); poison/disease->charnelix_blight; psychic/fear/illusion/silence->varook_silence; bludgeoning/stone->earth."
+      ]
+    }
+  },
+  "manifest": {
+    "id": "calanthor.manifest.v1",
+    "active_kernel": "calanthor.rules_kernel.v1",
+    "active_packs": {
+      "regions": [
+        "region.shakora_waters",
+        "region.verdant_valley_gaianok",
+        "region.emberwood_nyvakira",
+        "region.skyward_peaks_keairvari",
+        "region.cracked_earth_khalsarra",
+        "region.frozen_tundra_kaldraun"
+      ],
+      "ecoregions": [
+        "ecoregion.gloomwood_varook",
+        "ecoregion.sable_mire_charnelix"
+      ],
+      "overlays": [
+        "overlay.domain.nyvakira_heat",
+        "overlay.domain.keairvari_gale",
+        "overlay.domain.shakora_tide",
+        "overlay.domain.gaianok_bloom",
+        "overlay.domain.khalsarra_weight",
+        "overlay.domain.kaldraun_stasis",
+        "overlay.domain.varook_silence",
+        "overlay.domain.charnelix_blight"
+      ]
+    },
+    "recommended_default_overlay_by_region": {
+      "region.emberwood_nyvakira": {
+        "overlay.domain.nyvakira_heat": 0
+      },
+      "region.skyward_peaks_keairvari": {
+        "overlay.domain.keairvari_gale": 0
+      },
+      "region.shakora_waters": {
+        "overlay.domain.shakora_tide": 0
+      },
+      "region.verdant_valley_gaianok": {
+        "overlay.domain.gaianok_bloom": 0
+      },
+      "region.cracked_earth_khalsarra": {
+        "overlay.domain.khalsarra_weight": 0
+      },
+      "region.frozen_tundra_kaldraun": {
+        "overlay.domain.kaldraun_stasis": 0
+      },
+      "ecoregion.gloomwood_varook": {
+        "overlay.domain.varook_silence": 1
+      },
+      "ecoregion.sable_mire_charnelix": {
+        "overlay.domain.charnelix_blight": 2
+      }
+    },
+    "conflict_rule": "If multiple versions exist, the manifest-listed IDs are authoritative."
+  },
+  "packs": {
+    "regions": [
+      {
+        "id": "region.shakora_waters",
+        "kind": "region",
+        "display_name": "Shakora’s Waters",
+        "great_pet": "Shakora",
+        "core_tags": [
+          "water",
+          "cycle",
+          "mediation",
+          "cleansing",
+          "currents",
+          "river-lume"
+        ],
+        "habitation": {
+          "overall_viability": "settled",
+          "notes": "Rivers/coasts support trade, diplomacy, and healers."
+        },
+        "attunement": {
+          "passive_choose_1": [
+            {
+              "id": "passive.waterwise",
+              "name": "Waterwise",
+              "rule_text": "Once per scene, add +PB to Medicine, Insight, Survival, or Nature when it meaningfully involves water, weather, currents, purification, healing, or diplomacy-by-ritual."
+            },
+            {
+              "id": "passive.current_touched_casting",
+              "name": "Current-Touched Casting",
+              "rule_text": "For WATER-tagged spells/features, choose permanently: +1 spell attack OR +1 spell save DC."
+            }
+          ],
+          "surge_1_per_short_rest": {
+            "id": "surge.luminflux",
+            "name": "Luminflux Surge",
+            "rule_text": "After a WATER-tagged spell/feature, choose: +1d6 healing/damage OR end one minor condition (recommended: poisoned; or Blighted(1))."
+          }
+        },
+        "adventure_moves": [
+          {
+            "id": "move.read_the_current",
+            "name": "Read the Current",
+            "roll": "WIS(Insight) or INT(Investigation)",
+            "trigger": "When you study shifting situations—politics, storms, lies, faction tension, looming danger.",
+            "strong_hit": "Ask 3 questions; +1 forward acting on an answer.",
+            "weak_hit": "Ask 2 questions; GM adds a cost (time/attention/favor debt).",
+            "miss": "You misread; GM advances an opposing clock or reveals an undertow."
+          },
+          {
+            "id": "move.cleanse_what_clings",
+            "name": "Cleanse What Clings",
+            "roll": "WIS(Medicine or Nature)",
+            "trigger": "When you attempt to purify poison, rot, curse residue, or emotional stain.",
+            "strong_hit": "Remove it cleanly; gain a boon.",
+            "weak_hit": "Remove it, but it relocates (downstream/object/onto you: Minor Strain).",
+            "miss": "It spreads or attracts something hungry."
+          },
+          {
+            "id": "move.mediate_at_the_waterline",
+            "name": "Mediate at the Waterline",
+            "roll": "CHA(Persuasion) or WIS(Insight)",
+            "trigger": "When you prevent conflict where passage/water rights/old borders are at stake.",
+            "strong_hit": "Durable agreement; shared ritual.",
+            "weak_hit": "Agreement with hard concession.",
+            "miss": "Talks fracture; proof demanded (trial/quest/duel/sacrifice)."
+          }
+        ]
+      },
+      {
+        "id": "region.verdant_valley_gaianok",
+        "kind": "region",
+        "display_name": "Verdant Valley",
+        "great_pet": "Gaianok",
+        "core_tags": [
+          "verdant",
+          "growth",
+          "mutualism",
+          "stewardship",
+          "river-lume"
+        ],
+        "habitation": {
+          "overall_viability": "settled",
+          "notes": "Heartlands; stewardship politics; abundant communities."
+        },
+        "attunement": {
+          "passive_choose_1": [
+            {
+              "id": "passive.greenhand",
+              "name": "Greenhand",
+              "rule_text": "Once per scene, add +PB to Nature, Medicine, Animal Handling, or Survival for cultivation/ecosystems/antidotes/community care."
+            },
+            {
+              "id": "passive.verdant_casting",
+              "name": "Verdant Casting",
+              "rule_text": "For VERDANT-tagged spells/features, choose permanently: +1 spell attack OR +1 spell save DC."
+            }
+          ],
+          "surge_1_per_short_rest": {
+            "id": "surge.mutualism",
+            "name": "Mutualism Surge",
+            "rule_text": "When you heal/stabilize, grant temp HP = PB and choose: stand without movement OR move 5 ft without provoking."
+          }
+        },
+        "adventure_moves": [
+          {
+            "id": "move.hear_the_green",
+            "name": "Hear the Green",
+            "roll": "WIS(Nature)",
+            "trigger": "When you ask the land for guidance—paths, migrations, hidden dangers, who belongs where.",
+            "strong_hit": "Clear answer; +1 forward; learn an extra truth.",
+            "weak_hit": "Answer, but land demands stewardship.",
+            "miss": "Something else answers in its voice."
+          },
+          {
+            "id": "move.harvest_without_harm",
+            "name": "Harvest Without Harm",
+            "roll": "INT(Nature) or WIS(Survival)",
+            "trigger": "When you take resources without breaking the covenant.",
+            "strong_hit": "Take what you need; improve the site.",
+            "weak_hit": "Take it, but pay a cost (trace/debt/attention).",
+            "miss": "You damage the system; consequences ripple."
+          },
+          {
+            "id": "move.keep_the_covenant",
+            "name": "Keep the Covenant",
+            "roll": "CHA(Persuasion) or WIS(Insight)",
+            "trigger": "When you hold peace in a living ecosystem: factions/species/water rights.",
+            "strong_hit": "Lasting agreement benefiting multiple groups.",
+            "weak_hit": "Agreement creates a new boundary/ritual.",
+            "miss": "Old grievances flare; proof demanded."
+          }
+        ]
+      },
+      {
+        "id": "region.emberwood_nyvakira",
+        "kind": "region",
+        "display_name": "Emberwood",
+        "great_pet": "Nyvakira",
+        "core_tags": [
+          "fire",
+          "renewal",
+          "lava",
+          "emberkin",
+          "heat-ecology",
+          "mycelium-memory"
+        ],
+        "habitation": {
+          "overall_viability": "frontier",
+          "notes": "Inhabited by Emberkin and hardy enclaves; dangerous inner biomes."
+        },
+        "attunement": {
+          "passive_choose_1": [
+            {
+              "id": "passive.heatwise",
+              "name": "Heatwise",
+              "rule_text": "Once per scene, add +PB to Nature, Survival, Athletics, or Intimidation when heat/volcanic terrain/fire ecology/rites apply."
+            },
+            {
+              "id": "passive.flameborne_casting",
+              "name": "Flameborne Casting",
+              "rule_text": "For FIRE-tagged spells/features, choose permanently: +1 spell attack OR +1 spell save DC."
+            }
+          ],
+          "surge_1_per_short_rest": {
+            "id": "surge.spark_of_renewal",
+            "name": "Spark of Renewal",
+            "rule_text": "After dealing FIRE damage or completing a FIRE technique, choose: +1d6 FIRE damage OR temp HP = PB + CON mod (min 1)."
+          }
+        },
+        "adventure_moves": [
+          {
+            "id": "move.listen_to_whispering_burn",
+            "name": "Listen to the Whispering Burn",
+            "roll": "WIS(Nature) or INT(Investigation)",
+            "trigger": "When you read Emberwood’s living memory in soil/ash/mycelium/lava tubes.",
+            "strong_hit": "Ask 3 questions; +1 forward.",
+            "weak_hit": "2 answers, but you mirror an emotion or draw predator attention (Minor Strain).",
+            "miss": "The jungle misleads or reacts territorially."
+          },
+          {
+            "id": "move.cross_the_lava_veins",
+            "name": "Cross the Lava Veins",
+            "roll": "DEX(Acrobatics) or STR(Athletics)",
+            "trigger": "When you traverse lava rivers/obsidian ground/volcanic pools safely.",
+            "strong_hit": "Cross cleanly; find an advantage (shortcut/safe ledge/tunnel).",
+            "weak_hit": "Cross, but pay a cost (scorch gear/lose time/split group/attention).",
+            "miss": "Collapse/surge forces hard choice."
+          },
+          {
+            "id": "move.inferno_dance_of_claiming",
+            "name": "Inferno Dance of Claiming",
+            "roll": "CHA(Performance or Persuasion) or STR(Athletics)",
+            "trigger": "When you earn Emberkin trust or invoke tradition at a volcanic site.",
+            "strong_hit": "Respect + boon (escort/supplies/secret).",
+            "weak_hit": "Entry, but with a demand (vow/trial/promise).",
+            "miss": "Rite offense; social/spiritual/physical consequence."
+          }
+        ]
+      },
+      {
+        "id": "region.skyward_peaks_keairvari",
+        "kind": "region",
+        "display_name": "Skyward Peaks",
+        "great_pet": "Keairvari",
+        "core_tags": [
+          "air",
+          "storm",
+          "altitude",
+          "aeris",
+          "wind-currents",
+          "cloudspire",
+          "temple-of-winds"
+        ],
+        "habitation": {
+          "overall_viability": "frontier",
+          "notes": "Aeris enclaves and sky-cities; many routes are lethal without guidance."
+        },
+        "attunement": {
+          "passive_choose_1": [
+            {
+              "id": "passive.windwise",
+              "name": "Windwise",
+              "rule_text": "Once per scene, add +PB to Acrobatics, Perception, Survival, or Nature when reading wind/navigating heights/predicting storms."
+            },
+            {
+              "id": "passive.gale_touched_casting",
+              "name": "Gale-Touched Casting",
+              "rule_text": "For AIR-tagged spells/features, choose permanently: +1 spell attack OR +1 spell save DC."
+            }
+          ],
+          "surge_1_per_short_rest": {
+            "id": "surge.borrowed_wings",
+            "name": "Borrowed Wings",
+            "rule_text": "Reaction: reduce forced movement by 15 ft and move 10 ft without provoking; if airborne instead gain advantage on next DEX save before end of next turn."
+          }
+        },
+        "adventure_moves": [
+          {
+            "id": "move.read_the_wind_language",
+            "name": "Read the Wind Language",
+            "roll": "WIS(Survival) or INT(Nature)",
+            "trigger": "When you interpret wind/cloud/pressure to find safe routes or storm omens.",
+            "strong_hit": "Safe path + bonus (shortcut/shelter/favorable current).",
+            "weak_hit": "Path found; pay cost (time/exposure/predator attention).",
+            "miss": "Wind shifts; hazard/dead end/unwanted meeting."
+          },
+          {
+            "id": "move.cross_mist_bridges",
+            "name": "Cross the Mist Bridges",
+            "roll": "DEX(Acrobatics) or STR(Athletics)",
+            "trigger": "When you traverse airy bridges/wind tunnels/Cloudspire approaches.",
+            "strong_hit": "Cross cleanly; help one ally (+1 forward).",
+            "weak_hit": "Cross, but choose: leave something, split briefly, or Minor Strain.",
+            "miss": "Gust forces hard choice (cling/leap/retreat)."
+          },
+          {
+            "id": "move.appeal_to_the_aeris",
+            "name": "Appeal to the Aeris",
+            "roll": "CHA(Persuasion) or WIS(Insight)",
+            "trigger": "When you seek Aeris hospitality or access to sacred places.",
+            "strong_hit": "Guest status + guidance/boon.",
+            "weak_hit": "Passage with demand (rite/vow/trial).",
+            "miss": "Judged intruders; expulsion/challenge/binding terms."
+          }
+        ]
+      },
+      {
+        "id": "region.cracked_earth_khalsarra",
+        "kind": "region",
+        "display_name": "Cracked Earth",
+        "great_pet": "Khalsarra",
+        "core_tags": [
+          "earth",
+          "despair",
+          "echo",
+          "vow",
+          "ashwalkers",
+          "monoliths",
+          "endurance"
+        ],
+        "habitation": {
+          "overall_viability": "frontier",
+          "notes": "Sparse; Ashwalker nomads; outposts are temporary by custom."
+        },
+        "attunement": {
+          "passive_choose_1": [
+            {
+              "id": "passive.stonegrit",
+              "name": "Stonegrit",
+              "rule_text": "Once per scene, add +PB to Survival, Insight, Religion, or Athletics for endurance, resisting despair, interpreting omens, navigating by purpose."
+            },
+            {
+              "id": "passive.griefbound_casting",
+              "name": "Griefbound Casting",
+              "rule_text": "For EARTH-tagged spells/features, choose permanently: +1 spell attack OR +1 spell save DC."
+            }
+          ],
+          "surge_1_per_short_rest": {
+            "id": "surge.sacred_weight",
+            "name": "Sacred Weight",
+            "rule_text": "When you would fail a WIS save or Insight check, reroll. If success, gain temp HP = PB. If still fail, you succeed but are Slowed (-10 ft) until end of next turn."
+          }
+        },
+        "adventure_moves": [
+          {
+            "id": "move.walk_with_purpose",
+            "name": "Walk With Purpose",
+            "roll": "WIS(Insight) or WIS(Survival)",
+            "trigger": "When you cross the cracked plains where intention draws attention.",
+            "strong_hit": "Choose 2: safer route; avoid pursuit; learn lingering sorrow; arrive early.",
+            "weak_hit": "Make it, but pay cost (time/trace/Minor Strain).",
+            "miss": "Land answers: pursuit/false horizon/vow demanded."
+          },
+          {
+            "id": "move.bind_the_sorrow",
+            "name": "Bind the Sorrow",
+            "roll": "WIS(Religion) or CHA(Performance)",
+            "trigger": "When you chant/rite to prevent despair sinking deeper into a person/place.",
+            "strong_hit": "Hold sorrow; remove a fear/despair condition or reduce a despair clock by 2.",
+            "weak_hit": "It holds, but echoes outward; the land marks you.",
+            "miss": "You awaken what you tried to bind; escalation."
+          },
+          {
+            "id": "move.descend_the_question",
+            "name": "Descend the Question",
+            "roll": "INT(Investigation) or WIS(Insight)",
+            "trigger": "When you approach the Endless Maw seeking truth.",
+            "strong_hit": "Ask 2 questions; get direct useful answers; learn a safe boundary.",
+            "weak_hit": "Learn an answer, but it costs: memory detail/comfort/vow complication.",
+            "miss": "A destabilizing truth; hard move."
+          }
+        ]
+      },
+      {
+        "id": "region.frozen_tundra_kaldraun",
+        "kind": "region",
+        "display_name": "Frozen Tundra",
+        "great_pet": "Kaldraun",
+        "core_tags": [
+          "ice",
+          "winter",
+          "stasis",
+          "storm",
+          "frostborn",
+          "veilstorm",
+          "aurora-paths"
+        ],
+        "habitation": {
+          "overall_viability": "frontier",
+          "notes": "Frostborn culture survives via cairns, whisperers, and citadel refuge."
+        },
+        "attunement": {
+          "passive_choose_1": [
+            {
+              "id": "passive.icewise",
+              "name": "Icewise",
+              "rule_text": "Once per scene, add +PB to Survival, Perception, Athletics, or Nature when navigating whiteouts, reading ice, tracking across snow, enduring exposure."
+            },
+            {
+              "id": "passive.frosttouched_casting",
+              "name": "Frosttouched Casting",
+              "rule_text": "For ICE/WINTER-tagged spells/features, choose permanently: +1 spell attack OR +1 spell save DC."
+            }
+          ],
+          "surge_1_per_short_rest": {
+            "id": "surge.soulfrost_focus",
+            "name": "Soulfrost Focus",
+            "rule_text": "After cold damage or an ICE/WINTER save, choose: +1d6 cold damage OR target speed -10 ft until start of your next turn (no save) OR you gain cold resistance until end of your next turn."
+          }
+        },
+        "adventure_moves": [
+          {
+            "id": "move.read_the_cracks",
+            "name": "Read the Cracks",
+            "roll": "WIS(Survival) or INT(Nature)",
+            "trigger": "When you interpret ice fractures, wind pressure, omen-patterns.",
+            "strong_hit": "Ask 3 questions; +1 forward acting on one.",
+            "weak_hit": "2 answers, but pay price (time/supplies/attention).",
+            "miss": "Misread; hazard or ambush timing."
+          },
+          {
+            "id": "move.follow_the_aurora",
+            "name": "Follow the Aurora",
+            "roll": "WIS(Perception) or DEX(Acrobatics)",
+            "trigger": "When you chase auroras to find hidden paths.",
+            "strong_hit": "Safe passage + boon (shelter/shortcut/resource).",
+            "weak_hit": "Find path, but narrow: split/Minor Strain/lose something.",
+            "miss": "Lights lead to true but dangerous place."
+          },
+          {
+            "id": "move.weather_the_veilstorm",
+            "name": "Weather the Veilstorm",
+            "roll": "CON (group check) or WIS(Survival) led by a guide",
+            "trigger": "When a Veilstorm bears down and you must keep the party from becoming brittle statues.",
+            "strong_hit": "Survive intact; keep one benefit (supplies/morale/quick shelter).",
+            "weak_hit": "Survive; choose cost (supplies/Minor Strain/separation).",
+            "miss": "Someone is caught; rescue under pressure."
+          }
+        ]
+      }
+    ],
+    "ecoregions": [
+      {
+        "id": "ecoregion.gloomwood_varook",
+        "kind": "ecoregion",
+        "display_name": "Gloomwood",
+        "great_pet": "Varook",
+        "core_tags": [
+          "shadow",
+          "silence",
+          "memory",
+          "fear",
+          "purposeful-paths",
+          "echoes"
+        ],
+        "habitation": {
+          "overall_viability": "threshold",
+          "notes": "Edge hamlets/ward-sites; deep interior is effectively uninhabitable."
+        },
+        "subzones": [
+          {
+            "id": "gloomwood.threshold_ring",
+            "display_name": "Threshold Ring",
+            "viability": "threshold",
+            "auto_overlay_start": {
+              "overlay.domain.varook_silence": 0
+            },
+            "encounter_bias": {
+              "roles": {
+                "controller": 0.3,
+                "skirmisher": 0.25,
+                "support": 0.15,
+                "brute": 0.15,
+                "artillery": 0.15
+              },
+              "motifs": {
+                "silence": 1.2,
+                "fear": 1.1,
+                "memory": 1.2,
+                "ambush": 1.1
+              }
+            },
+            "hazards": [
+              "Hush Pockets",
+              "Echo Glades"
+            ],
+            "monster_graft_traits": [
+              "Silence-Linked Awareness",
+              "Echo Bait"
+            ]
+          },
+          {
+            "id": "gloomwood.deep_gloom",
+            "display_name": "Deep Gloom",
+            "viability": "uninhabitable",
+            "auto_overlay_start": {
+              "overlay.domain.varook_silence": 1
+            },
+            "encounter_bias": {
+              "roles": {
+                "controller": 0.4,
+                "skirmisher": 0.25,
+                "support": 0.1,
+                "brute": 0.1,
+                "artillery": 0.15
+              },
+              "motifs": {
+                "memory": 1.4,
+                "silence": 1.3,
+                "fear": 1.2,
+                "isolation": 1.3
+              }
+            },
+            "hazards": [
+              "Blackfang Still",
+              "Name-Leeching Mist"
+            ],
+            "monster_graft_traits": [
+              "Memory Web",
+              "Silence Break"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ecoregion.sable_mire_charnelix",
+        "kind": "ecoregion",
+        "display_name": "Sable Mire",
+        "great_pet": "Charnelix",
+        "core_tags": [
+          "rot",
+          "disease",
+          "decay",
+          "spores",
+          "web",
+          "mire",
+          "unnatural-persistence"
+        ],
+        "habitation": {
+          "overall_viability": "uninhabitable",
+          "notes": "Outer Mire supports desperate camps; deep mire is lethal."
+        },
+        "subzones": [
+          {
+            "id": "sable_mire.outer_mire",
+            "display_name": "Outer Mire",
+            "viability": "threshold",
+            "auto_overlay_start": {
+              "overlay.domain.charnelix_blight": 1
+            },
+            "encounter_bias": {
+              "roles": {
+                "controller": 0.25,
+                "skirmisher": 0.25,
+                "support": 0.2,
+                "brute": 0.15,
+                "artillery": 0.15
+              },
+              "motifs": {
+                "disease": 1.3,
+                "spores": 1.2,
+                "web": 1.2,
+                "attrition": 1.2
+              }
+            },
+            "hazards": [
+              "Sinkhole Lace",
+              "Spore Bloom"
+            ],
+            "monster_graft_traits": [
+              "Blight Scent",
+              "Web-Lane Mastery"
+            ]
+          },
+          {
+            "id": "sable_mire.deep_mire",
+            "display_name": "Deep Mire",
+            "viability": "uninhabitable",
+            "auto_overlay_start": {
+              "overlay.domain.charnelix_blight": 2
+            },
+            "encounter_bias": {
+              "roles": {
+                "controller": 0.35,
+                "skirmisher": 0.2,
+                "support": 0.15,
+                "brute": 0.15,
+                "artillery": 0.15
+              },
+              "motifs": {
+                "web": 1.4,
+                "spores": 1.3,
+                "persistence": 1.3,
+                "zone-control": 1.2
+              }
+            },
+            "hazards": [
+              "Blightwell Moan",
+              "Stillbone Cages"
+            ],
+            "monster_graft_traits": [
+              "Spore-Rebirth",
+              "Web Command"
+            ]
+          }
+        ]
+      }
+    ],
+    "overlays": [
+      {
+        "id": "overlay.domain.nyvakira_heat",
+        "kind": "overlay",
+        "display_name": "Nyvakira Domain Pressure: Heat Debt",
+        "great_pet": "Nyvakira",
+        "notes": "Use this overlay when Emberwood is actively ‘awake’—volcanic pulse, rites, or territorial response.",
+        "track": {
+          "name": "Heat Debt",
+          "range": {
+            "min": 0,
+            "max": 6
+          },
+          "increase_triggers": [
+            "Crossing lava/obsidian hazards without adequate preparation (failed travel move or CON save).",
+            "Overusing fire rites/techniques in a single scene (GM-defined threshold).",
+            "Taking fire damage while already Scorched, or pushing through exhaustion."
+          ],
+          "threshold_effects": [
+            {
+              "at": 2,
+              "effects": [
+                "Scorched: your next Stealth or Concentration-related d20 roll takes -1 (Minor Strain flavor)."
+              ]
+            },
+            {
+              "at": 4,
+              "effects": [
+                "Heat Haze: disadvantage on your next concentration check OR ranged attack roll (your choice)."
+              ]
+            },
+            {
+              "at": 6,
+              "effects": [
+                "Ignition Event: the environment flares (lava surge/emberstorm). GM introduces a hard choice: lose route, lose supplies, or split the group."
+              ]
+            }
+          ]
+        },
+        "moves": [
+          {
+            "id": "move.ride_the_heat",
+            "name": "Ride the Heat",
+            "trigger": "When you use Emberwood’s heat to gain an advantage (speed, intimidation, forging a path).",
+            "roll": "CON save or STR(Athletics)",
+            "strong_hit": "You gain the advantage cleanly; reduce Heat Debt by 1.",
+            "weak_hit": "You gain it, but Heat Debt +1 or take Minor Strain.",
+            "miss": "The heat bites back; Heat Debt +2 and a hazard manifests."
+          },
+          {
+            "id": "move.quench_or_feed",
+            "name": "Quench or Feed",
+            "trigger": "When you try to cool, vent, or redirect dangerous heat (lava tube, emberstorm).",
+            "roll": "INT(Investigation) or WIS(Nature)",
+            "strong_hit": "You redirect safely; create a safe zone or shortcut.",
+            "weak_hit": "You succeed, but something valuable is scorched or a predator is drawn.",
+            "miss": "A surge occurs; the party must choose between safety and an objective."
+          }
+        ],
+        "counterplay": [
+          "Shakora purification/cooling rites (or abundant water + careful venting) reduce Heat Debt by 1.",
+          "A full short rest in true shade/shelter reduces Heat Debt by 1 (in Emberwood, this may require scouting).",
+          "Emberkin renewal rite: burn something old/meaningful to ‘reset’—reduce Heat Debt by 2 but accept a narrative sacrifice."
+        ],
+        "monster_graft_traits": [
+          {
+            "trait": "Ashwake Predator",
+            "hook": "Targets with Heat Debt ≥2 are easier to track; predator gains advantage on first attack after hiding."
+          },
+          {
+            "trait": "Emberburst Step",
+            "hook": "Once per encounter, the monster can dash through hazardous heat without penalty and leave a 5-ft ember patch (difficult terrain)."
+          },
+          {
+            "trait": "Renewal Through Flame",
+            "hook": "When reduced to 0 HP, the monster leaves a smoldering cocoon; if not quenched/purified, it reforms at 1 HP at end of next round (once)."
+          }
+        ]
+      },
+      {
+        "id": "overlay.domain.keairvari_gale",
+        "kind": "overlay",
+        "display_name": "Keairvari Domain Pressure: Altitude Strain",
+        "great_pet": "Keairvari",
+        "notes": "Use when Skyward Peaks become a character: storms, trials, and the ‘language of air’ matters.",
+        "track": {
+          "name": "Altitude Strain",
+          "range": {
+            "min": 0,
+            "max": 6
+          },
+          "increase_triggers": [
+            "Extended climbing/flying without acclimation (failed travel move or CON check).",
+            "Exposure to sudden stormfronts/downdrafts (miss/weak hit on wind navigation).",
+            "Breaking a vow/ritual respect to the wind in a sacred place (Temple/Cloudspire)."
+          ],
+          "threshold_effects": [
+            {
+              "at": 2,
+              "effects": [
+                "Breathless: speed -5 ft until you take a short rest or receive aid."
+              ]
+            },
+            {
+              "at": 4,
+              "effects": [
+                "Thin-Aired: disadvantage on your next Perception check OR ranged attack roll (your choice)."
+              ]
+            },
+            {
+              "at": 6,
+              "effects": [
+                "Storm Oath: the wind demands payment; GM triggers a storm complication (lightning strike risk, forced reroute, or separation)."
+              ]
+            }
+          ]
+        },
+        "moves": [
+          {
+            "id": "move.borrow_the_current",
+            "name": "Borrow the Current",
+            "trigger": "When you attempt a daring traversal using wind-currents (mist bridge, tunnel, glide).",
+            "roll": "DEX(Acrobatics) or WIS(Survival)",
+            "strong_hit": "You cross swiftly and safely; reduce Altitude Strain by 1.",
+            "weak_hit": "You cross, but take Minor Strain or Altitude Strain +1.",
+            "miss": "A downdraft forces a hard choice: drop gear, split, or take injury."
+          },
+          {
+            "id": "move.honor_the_wind",
+            "name": "Honor the Wind",
+            "trigger": "When you perform a breathing rite, vow, or offering to align with Keairvari’s will.",
+            "roll": "CHA(Performance/Persuasion) or WIS(Insight)",
+            "strong_hit": "Gain safe passage or shelter; reduce Altitude Strain by 2.",
+            "weak_hit": "Reduce by 1, but accept a small vow (silence, no fire, no blood on the ledge, etc.).",
+            "miss": "The rite offends or is incomplete; a storm test arrives soon."
+          }
+        ],
+        "counterplay": [
+          "Acclimation downtime (half-day) reduces Altitude Strain by 1.",
+          "Shelter in a wind-shadow (cave/Cloudspire corridor) + warm drink reduces by 1 on short rest.",
+          "Aeris guide assistance: once per day, ignore one trigger that would increase Altitude Strain."
+        ],
+        "monster_graft_traits": [
+          {
+            "trait": "Gale Corridor Mastery",
+            "hook": "Forced movement increases by 5 ft and the monster can reposition 5 ft as a reaction once per round."
+          },
+          {
+            "trait": "Storm-Sense",
+            "hook": "In wind or storm, the monster has advantage on initiative and cannot be surprised."
+          },
+          {
+            "trait": "Altitude Punisher",
+            "hook": "Creatures with Altitude Strain ≥4 have disadvantage on saves vs being pushed/pulled by this monster."
+          }
+        ]
+      },
+      {
+        "id": "overlay.domain.shakora_tide",
+        "kind": "overlay",
+        "display_name": "Shakora Domain Pressure: Tide Owed",
+        "great_pet": "Shakora",
+        "notes": "Optional. Use when waterways are sacred/politically charged or when the river is actively ‘answering’ behavior.",
+        "track": {
+          "name": "Tide Owed",
+          "range": {
+            "min": 0,
+            "max": 6
+          },
+          "increase_triggers": [
+            "Polluting a waterway, refusing cleansing, or spilling blood into a sacred current.",
+            "Breaking a treaty/promise made ‘by the river’ or denying safe passage unjustly.",
+            "Ignoring a clear opportunity to mediate a conflict at the waterline (GM call)."
+          ],
+          "threshold_effects": [
+            {
+              "at": 2,
+              "effects": [
+                "Undertow: your next Athletics/Acrobatics check involving water takes -1 (Minor Strain)."
+              ]
+            },
+            {
+              "at": 4,
+              "effects": [
+                "Salt in Wounds: the next healing you receive is reduced by PB (minimum 1)."
+              ]
+            },
+            {
+              "at": 6,
+              "effects": [
+                "Cleansing Demand: a flood/tide event forces a choice—confess, sacrifice, or be swept into a new situation."
+              ]
+            }
+          ]
+        },
+        "moves": [
+          {
+            "id": "move.call_the_cleansing",
+            "name": "Call the Cleansing",
+            "trigger": "When you attempt to wash corruption from a place or person using Shakora’s rites.",
+            "roll": "WIS(Medicine/Nature)",
+            "strong_hit": "Reduce Tide Owed by 2 and cleanse the target/source.",
+            "weak_hit": "Cleanse it, but relocate it; reduce Tide Owed by 1.",
+            "miss": "It spreads downstream; Tide Owed +1 and an enemy clock advances."
+          },
+          {
+            "id": "move.settle_by_current",
+            "name": "Settle by Current",
+            "trigger": "When you negotiate passage, tribute, or treaty under Shakora’s witness.",
+            "roll": "CHA(Persuasion)",
+            "strong_hit": "Fair settlement; gain a lasting boon (safe route/ally).",
+            "weak_hit": "Settlement with a concession.",
+            "miss": "The current turns; conflict escalates immediately."
+          }
+        ],
+        "counterplay": [
+          "Meaningful mediation (ending a conflict without bloodshed) reduces Tide Owed by 1.",
+          "Purification ritual + repaired harm (cleanup, restitution) reduces by 2.",
+          "Honoring a water taboo for a day (no pollution, no needless violence) reduces by 1 at dawn."
+        ],
+        "monster_graft_traits": [
+          {
+            "trait": "Undertow Grip",
+            "hook": "On hit, pull the target 10 ft (or knock prone if no room)."
+          },
+          {
+            "trait": "Riptide Zone",
+            "hook": "Once per encounter, create a 10-ft zone of difficult terrain that also pushes creatures 5 ft at start of their turn."
+          },
+          {
+            "trait": "Cleansing Burst",
+            "hook": "When a creature with Rot/Blight effects is hit, the monster can choose to cleanse (remove) or spread (transfer) one minor condition (GM-facing)."
+          }
+        ]
+      },
+      {
+        "id": "overlay.domain.gaianok_bloom",
+        "kind": "overlay",
+        "display_name": "Gaianok Domain Pressure: Covenant Balance",
+        "great_pet": "Gaianok",
+        "notes": "Use when Verdant Valley politics/ecosystems are actively judging extraction vs stewardship.",
+        "track": {
+          "name": "Covenant Balance",
+          "range": {
+            "min": 0,
+            "max": 6
+          },
+          "increase_triggers": [
+            "Overharvesting, poisoning soil/water, or harming a keystone species.",
+            "Refusing stewardship demands after benefiting from the land (weak hit cost ignored).",
+            "Allowing rot/parasites to spread through inaction (GM call)."
+          ],
+          "threshold_effects": [
+            {
+              "at": 2,
+              "effects": [
+                "Thornback: the next forced movement you take is reduced by 5 ft (vines catch you); also -1 on next Stealth in dense growth (Minor Strain)."
+              ]
+            },
+            {
+              "at": 4,
+              "effects": [
+                "Swarm Response: you must make a CON save or become Poisoned until end of next turn (pollen/ants/spores)."
+              ]
+            },
+            {
+              "at": 6,
+              "effects": [
+                "Overgrowth Event: the terrain entangles; escape requires a group effort, restitution, or pruning rite."
+              ]
+            }
+          ]
+        },
+        "moves": [
+          {
+            "id": "move.prune_or_protect",
+            "name": "Prune or Protect",
+            "trigger": "When you restore balance by pruning, replanting, relocating predators, or negotiating stewardship.",
+            "roll": "WIS(Nature) or CHA(Persuasion)",
+            "strong_hit": "Reduce Covenant Balance by 2 and gain a boon (safe passage, ingredient, ally-beast).",
+            "weak_hit": "Reduce by 1, but take on an obligation (guard a grove, repay water, etc.).",
+            "miss": "Your action backfires; balance shifts against you (new hazard, faction anger)."
+          },
+          {
+            "id": "move.take_without_breaking",
+            "name": "Take Without Breaking",
+            "trigger": "When you harvest something rare under time pressure.",
+            "roll": "INT(Nature) or WIS(Survival)",
+            "strong_hit": "You take it cleanly; no increase to Covenant Balance.",
+            "weak_hit": "You take it, but Covenant Balance +1 or owe a debt.",
+            "miss": "You scar the system; Covenant Balance +2 and repercussions start."
+          }
+        ],
+        "counterplay": [
+          "Restitution (replanting, feeding pollinators, repairing water channels) reduces by 1.",
+          "Steward’s rite (community witness + vow) reduces by 2.",
+          "Shakora cleansing used respectfully can reduce by 1 if imbalance involved contamination."
+        ],
+        "monster_graft_traits": [
+          {
+            "trait": "Mutualist Swarm",
+            "hook": "Once per encounter, summon a 10-ft swarm zone; creatures inside have disadvantage on one type of check (choose: Perception/Stealth/Concentration)."
+          },
+          {
+            "trait": "Vine Snare",
+            "hook": "On hit, target must succeed on STR save or be Restrained until end of its next turn."
+          },
+          {
+            "trait": "Guardian’s Rebuke",
+            "hook": "If the party harms the environment (fire/acid indiscriminately), the monster gains +PB damage for 1 round."
+          }
+        ]
+      },
+      {
+        "id": "overlay.domain.khalsarra_weight",
+        "kind": "overlay",
+        "display_name": "Khalsarra Domain Pressure: Sacred Weight",
+        "great_pet": "Khalsarra",
+        "notes": "This is Khalsarra’s ‘the land remembers’ pressure: it rewards purpose, witness, and mercy; it punishes aimlessness and betrayal.",
+        "track": {
+          "name": "Sacred Weight",
+          "range": {
+            "min": 0,
+            "max": 6
+          },
+          "increase_triggers": [
+            "Traveling without declared purpose through the Cracked Earth (failed 'Walk With Purpose' or aimless wandering).",
+            "Witnessing or exploiting grief-sites (monolith fields, Endless Maw) without ritual respect.",
+            "Breaking a vow made to endure (abandoning allies, refusing a needed mercy, betraying a chant-circle).",
+            "Prolonged isolation or repeated weak hits that accept 'numbness' costs (GM call)."
+          ],
+          "threshold_effects": [
+            {
+              "at": 2,
+              "effects": [
+                "Weighed: speed -5 ft until you complete a purposeful action (help an ally, uphold a vow, or reach a stated waypoint).",
+                "Additionally, your next social check to inspire hope takes -1 (Minor Strain: numbness)."
+              ]
+            },
+            {
+              "at": 4,
+              "effects": [
+                "Hope Erosion: you have disadvantage on your next WIS save against fear/despair OR your next death save (your choice when it triggers).",
+                "If you choose the WIS save option, also mark Minor Strain."
+              ]
+            },
+            {
+              "at": 6,
+              "effects": [
+                "Despair Spiral: the land answers. GM triggers one: sand-wind of whispers, monolith inscription condemns a choice, or a Wyrmspawn pursuit begins.",
+                "Until the spiral is addressed, the party cannot gain the benefits of a long rest in the Cracked Earth."
+              ]
+            }
+          ]
+        },
+        "moves": [
+          {
+            "id": "move.claim_purpose",
+            "name": "Claim Purpose",
+            "trigger": "When you state a clear purpose (oath, waypoint, promise) and act on it under pressure.",
+            "roll": "CHA(Persuasion) or WIS(Insight)",
+            "strong_hit": "Reduce Sacred Weight by 2; an ally also clears Minor Strain (witnessed purpose).",
+            "weak_hit": "Reduce by 1, but the GM names a vow-complication that must be upheld before sunset.",
+            "miss": "Your purpose is challenged; Sacred Weight +1 and a test appears immediately."
+          },
+          {
+            "id": "move.bind_the_sorrow",
+            "name": "Bind the Sorrow",
+            "trigger": "When you perform Ashwalker-style binding (chant, circle, offering) to keep despair from swallowing someone or a place.",
+            "roll": "WIS(Religion) or CHA(Performance)",
+            "strong_hit": "Contain the sorrow; remove Frightened or a despair condition and reduce Sacred Weight by 1.",
+            "weak_hit": "Contain it, but it leaves a mark: one participant takes Minor Strain or loses a small comfort (GM).",
+            "miss": "The sorrow echoes; Sacred Weight +1 and the scene escalates."
+          },
+          {
+            "id": "move.choose_mercy_or_might",
+            "name": "Choose Mercy or Might",
+            "trigger": "When violence is an easy answer in a place of grief, and you choose a harder path.",
+            "roll": "WIS(Insight) or CHA(Persuasion)",
+            "strong_hit": "You avert bloodshed; reduce Sacred Weight by 2 and gain goodwill or safe passage.",
+            "weak_hit": "You avert it, but pay a cost: supplies, time, or a vow.",
+            "miss": "Your restraint is read as weakness; confrontation happens anyway—but on worse terms."
+          }
+        ],
+        "counterplay": [
+          "A witnessed vow (spoken aloud, agreed by the group) reduces Sacred Weight by 1 immediately.",
+          "Completing a declared waypoint/purpose reduces by 1 (once per day).",
+          "Ashwalker chant-circle rest: a short rest with a binding chant reduces by 2 (requires quiet and time).",
+          "Compassionate act in a despair hotspot (burying the dead, rescuing a lost traveler) reduces by 1."
+        ],
+        "monster_graft_traits": [
+          {
+            "trait": "Intention Sense",
+            "hook": "The monster knows the location of creatures who have Sacred Weight ≥4 within 60 ft unless warded; it prefers them as prey."
+          },
+          {
+            "trait": "Sorrowquake",
+            "hook": "Recharge 5–6: create a 10-ft tremor zone; creatures inside must make DEX save or fall prone and gain Minor Strain."
+          },
+          {
+            "trait": "Vow-Break Punisher",
+            "hook": "If a creature breaks a declared vow in scene, the monster can react to deal psychic damage or impose Frightened (save)."
+          }
+        ]
+      },
+      {
+        "id": "overlay.domain.kaldraun_stasis",
+        "kind": "overlay",
+        "display_name": "Kaldraun Domain Pressure: Frost Lock",
+        "great_pet": "Kaldraun",
+        "notes": "Use when the tundra is actively testing the party: veilstorm season, Frostwake, or Shardspire resonance.",
+        "track": {
+          "name": "Frost Lock",
+          "range": {
+            "min": 0,
+            "max": 6
+          },
+          "increase_triggers": [
+            "Prolonged exposure without proper shelter (failed 'Weather the Veilstorm' or missed travel shelter checks).",
+            "Crossing thin ice or aurora paths recklessly (miss/weak hit costs).",
+            "Frostwake events (thaws) that release ancient cold and then snap-freeze again.",
+            "Lingering near Shardspire/Veilspire in open air during storm hours (GM call)."
+          ],
+          "threshold_effects": [
+            {
+              "at": 2,
+              "effects": [
+                "Chilled: disadvantage on your next Athletics or Sleight of Hand check (fingers numb).",
+                "Also, your speed is reduced by 5 ft until you warm up at a shelter."
+              ]
+            },
+            {
+              "at": 4,
+              "effects": [
+                "Frozen Tempo: you cannot take reactions until the start of your next turn (you move like glass).",
+                "Additionally, your next saving throw vs cold or restraint is made at -1 (Minor Strain: brittle breath)."
+              ]
+            },
+            {
+              "at": 6,
+              "effects": [
+                "Brittle Stasis: the tundra tries to preserve you. GM triggers one: partial encasement (restrained), gear freeze (weapon/tool disabled), or forced separation by whiteout.",
+                "Until addressed, long rest benefits are reduced (no exhaustion recovery, or no hit dice recovery—GM choose)."
+              ]
+            }
+          ]
+        },
+        "moves": [
+          {
+            "id": "move.claim_shelter",
+            "name": "Claim Shelter",
+            "trigger": "When you secure shelter against storm and cold (cairn, cave, citadel niche) under time pressure.",
+            "roll": "WIS(Survival) or INT(Investigation)",
+            "strong_hit": "Shelter holds; reduce Frost Lock by 2 and keep supplies.",
+            "weak_hit": "Shelter holds, but choose: lose supplies, take Minor Strain, or attract a watcher.",
+            "miss": "False shelter; a veilstorm complication hits immediately."
+          },
+          {
+            "id": "move.read_the_ice_runes",
+            "name": "Read the Ice Runes",
+            "trigger": "When you interpret cracks/aurora patterns like a Whisperer to avoid disaster.",
+            "roll": "WIS(Survival) or INT(Nature)",
+            "strong_hit": "Reduce Frost Lock by 1 and learn a safe route/omen (ask 2 questions).",
+            "weak_hit": "Learn one truth, but Frost Lock +1 or pay time/supplies.",
+            "miss": "Misread; route leads into hazard or an awakened horror’s path."
+          },
+          {
+            "id": "move_share_the_warmth",
+            "name": "Share the Warmth",
+            "trigger": "When you prevent isolation from killing the group (shared heat, witness, rotation of watch).",
+            "roll": "CHA(Persuasion) or WIS(Insight)",
+            "strong_hit": "Clear Minor Strain from two allies; reduce Frost Lock by 1 for the group.",
+            "weak_hit": "Clear one ally, but you take Minor Strain (you carry the fatigue).",
+            "miss": "Morale cracks; separation or panic triggers a hard move."
+          }
+        ],
+        "counterplay": [
+          "A true shelter short rest reduces Frost Lock by 1; a fortified shelter reduces by 2.",
+          "Fire/heat used carefully (without attracting storms/predators) reduces by 1.",
+          "Aurora-path navigation done respectfully can prevent one trigger per day.",
+          "Frostborn cairn offering grants a one-time immunity to increasing Frost Lock for the next travel scene."
+        ],
+        "monster_graft_traits": [
+          {
+            "trait": "Veilstorm Pulse",
+            "hook": "At initiative 20 (lair), a chill pulse forces CON saves or applies Chilled (or Frost Lock +1 in overlay scenes)."
+          },
+          {
+            "trait": "Brittle Break",
+            "hook": "If a Chilled/Frozen target takes bludgeoning, the monster adds +PB damage (glass-shatter moment)."
+          },
+          {
+            "trait": "Stasis Snare",
+            "hook": "On hit, reduce target speed by 10 ft; if already reduced, impose Restrained until end of next turn (save)."
+          }
+        ]
+      },
+      {
+        "id": "overlay.domain.varook_silence",
+        "kind": "overlay",
+        "display_name": "Varook Domain Pressure: Memory Strain",
+        "great_pet": "Varook",
+        "notes": "This overlay is primarily for Gloomwood; use elsewhere only for special intrusions/plot.",
+        "track": {
+          "name": "Memory Strain",
+          "range": {
+            "min": 0,
+            "max": 6
+          },
+          "increase_triggers": [
+            "Deep Gloom travel (auto-start at 1/day) or failing Gloomwood navigation moves.",
+            "Speaking taboo names or telling lies within hush pockets (GM call).",
+            "Confronting memory-catching phenomena (webs/echoes) without an anchor."
+          ],
+          "threshold_effects": [
+            {
+              "at": 2,
+              "effects": [
+                "Lose a minor detail (a name, a route, a promise) until you rest with a witness."
+              ]
+            },
+            {
+              "at": 4,
+              "effects": [
+                "Disadvantage on your next concentration check OR Insight check (choose when triggered)."
+              ]
+            },
+            {
+              "at": 6,
+              "effects": [
+                "Haunted Break: GM triggers a shadow move (panic, isolation, false memory, bargain)."
+              ]
+            }
+          ]
+        },
+        "moves": [
+          {
+            "id": "move.walk_where_others_vanish",
+            "name": "Walk Where Others Vanish",
+            "trigger": "When you navigate purposeful shadow paths or attempt stealth through living hush.",
+            "roll": "WIS(Perception) or DEX(Stealth)",
+            "strong_hit": "You pass unseen and keep bearings; reduce Memory Strain by 1.",
+            "weak_hit": "You pass, but pay a memory cost: lose time/detail or leave an echo.",
+            "miss": "You are rerouted; the forest takes you where it wants you."
+          },
+          {
+            "id": "move.perform_lightward",
+            "name": "Perform the Lightward",
+            "trigger": "When you do a grounding rite with witness and record (names, vows, marks).",
+            "roll": "WIS(Religion) or CHA(Performance)",
+            "strong_hit": "Reduce Memory Strain by 2 for the party and secure safe rest.",
+            "weak_hit": "Reduce by 1, but the rite draws attention.",
+            "miss": "A verse is wrong; Memory Strain +1 and something watches."
+          }
+        ],
+        "counterplay": [
+          "Witness rest: an ally repeats your name/purpose; reduce Memory Strain by 1.",
+          "Coastal rhythm/song (near Shakora border) reduces by 1 at dusk.",
+          "Recording names/intentions physically (charcoal/stone) prevents one detail-loss once per day."
+        ],
+        "monster_graft_traits": [
+          {
+            "trait": "Memory Web",
+            "hook": "On hit, add a memory thread; at 3 threads the target is Confused-like (short duration)."
+          },
+          {
+            "trait": "Silence Break",
+            "hook": "Reaction: when a creature speaks/casts verbally, impose a save vs Silenced or reposition."
+          },
+          {
+            "trait": "Echo Lure",
+            "hook": "Project familiar voice once per encounter; targets must save or be drawn 10 ft."
+          }
+        ]
+      },
+      {
+        "id": "overlay.domain.charnelix_blight",
+        "kind": "overlay",
+        "display_name": "Charnelix Domain Pressure: Blight Track",
+        "great_pet": "Charnelix",
+        "notes": "Primarily for Sable Mire; use elsewhere only for outbreaks/intrusions.",
+        "track": {
+          "name": "Blight Track",
+          "range": {
+            "min": 0,
+            "max": 6
+          },
+          "increase_triggers": [
+            "Fail CON saves vs spores/disease/tainted water; take necrotic/poison wounds in the Mire.",
+            "Spending a day in the Outer Mire (auto-start 1) or Deep Mire (auto-start 2).",
+            "Ignoring infection sources or carrying contaminated gear without cleansing."
+          ],
+          "threshold_effects": [
+            {
+              "at": 2,
+              "effects": [
+                "Disadvantage on the next healing received until you rest (life resists being reclaimed)."
+              ]
+            },
+            {
+              "at": 4,
+              "effects": [
+                "-5 ft speed; coughing spores under stress (social/stealth complication)."
+              ]
+            },
+            {
+              "at": 6,
+              "effects": [
+                "Outbreak: GM triggers a rot move—hallucinations, spread, or a Mire entity is drawn to you."
+              ]
+            }
+          ]
+        },
+        "moves": [
+          {
+            "id": "move.rot_spreads_in_silence",
+            "name": "Rot Spreads in Silence",
+            "trigger": "When you try to contain infection in the field.",
+            "roll": "WIS(Medicine) or INT(Investigation)",
+            "strong_hit": "Contain it; learn the source; reduce Blight by 1.",
+            "weak_hit": "Contain it, but it costs time/supplies or Blight +1 to someone.",
+            "miss": "It blooms; Blight +1 and a Mire complication."
+          },
+          {
+            "id": "move.brew_against_blight",
+            "name": "Brew Against the Blight",
+            "trigger": "When you craft remedy/ward from Mire ingredients under pressure.",
+            "roll": "WIS(Medicine) or INT(Nature)",
+            "strong_hit": "Reduce Blight by 1 and make an extra dose.",
+            "weak_hit": "Works, but drawback (unstable/fatigue/rare ingredient).",
+            "miss": "Contamination attracts something."
+          }
+        ],
+        "counterplay": [
+          "Clean water immersion + bandage change reduces Blight by 1.",
+          "Field antitoxin (outer mire craft) reduces by 1 (once per short rest).",
+          "Shakora cleansing rites reduce by 2 if performed at a true spring.",
+          "Controlled burn (where safe) can clear one spore hazard without changing Blight, but may create smoke attention."
+        ],
+        "monster_graft_traits": [
+          {
+            "trait": "Spore Burst",
+            "hook": "On taking damage, release a 10-ft spore cloud (CON save or Poisoned)."
+          },
+          {
+            "trait": "Web-Lane Control",
+            "hook": "At initiative 20 (lair), webbing shifts to restrain or separate."
+          },
+          {
+            "trait": "Unnatural Persistence",
+            "hook": "Once per encounter, reanimate as spore-form at 1 HP unless purified/burned."
+          }
+        ]
+      }
+    ]
+  }
+}
