@@ -14,13 +14,16 @@ This repo supports **monster/encounter generation** via:
 
 ## Files
 
-### `data/calanthor_unified_v2.json` (ACTIVE)
+### `data/calanthor/data/unified/calanthor_unified_v2.json` (ACTIVE)
 Single authoritative system file containing:
 - Rules Kernel v2 (DC-based procedures + flight progression + Aerial Strain)
 - Region Packs (Shakora, Verdant, Emberwood, Skyward Peaks, Cracked Earth, Frozen Tundra)
 - EcoRegion Packs (Gloomwood, Sable Mire)
 - Domain Overlays (one per Great Pet)
 - Manifest (authoritative IDs)
+
+### `data/calanthor/data/atlas/calanthor_atlas_latest.json`
+Derived atlas data (regions, eco-regions, overlays) extracted from the unified packs.
 
 ### `data/deprecated/calanthor_unified_v1.json`
 Prior version that used Move tiers (15+/10–14/≤9). Kept for history only.
@@ -34,6 +37,15 @@ A Procedure Check is a named, repeatable check for travel/rites/negotiation/haza
 Optional margin:
 - **Success by 5+**: extra benefit
 - **Fail by 5+**: harsher consequence
+
+## Data validation
+To confirm the atlas/unified datasets are coherent, run:
+
+```
+python3 data/calanthor/tools/calanthor_validate.py \
+  --unified data/calanthor/data/unified/calanthor_unified_v2.json \
+  --atlas data/calanthor/data/atlas/calanthor_atlas_latest.json
+```
 
 ## Flight balancing
 Kernel v2 includes an **Aerial Mastery** ladder (Jump→Glide→Burst→Sustained→Tactical→Mastery) and an **Aerial Strain** track to keep flight cinematic but fair at low levels.
