@@ -1,9 +1,8 @@
-from pathlib import Path
 from calanthor_system import load_unified
 
 def main():
-    root = Path(__file__).resolve().parents[2]
-    u = load_unified(root / "data" / "calanthor_unified_v2.json")
+    # Uses canonical data location under data/calanthor/data/unified
+    u = load_unified()
 
     # Show one procedure check example (Frozen Tundra)
     region = next(p for p in u["packs"]["regions"] if p["id"] == "region.frozen_tundra_kaldraun")

@@ -1,8 +1,12 @@
 from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
 from calanthor_system import load_unified
 
 def test_unified_loads():
-    root = Path(__file__).resolve().parents[1]
-    u = load_unified(root / "data" / "calanthor_unified_v2.json")
+    u = load_unified()
     assert u["kernel"]["id"].endswith("v2")
     assert "procedure_checks" in u["packs"]["regions"][0]
